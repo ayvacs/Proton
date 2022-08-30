@@ -1,20 +1,22 @@
 local Proton = script.Parent.Parent
 
-local LogError = Proton.Utilities.LogError
-
 
 return function (className: string)
 	return function(properties: table): Instance
 		local success, inst = pcall(Instance.new, className)
 		
 		if not (success and inst) then
-			return LogError("Unable to create instance", success, inst)
+			return warn("Unable to create instance")
 		end
 		
 		for i, v in pairs(properties) do
-			pcall(function()
+			local success, err = pcall(function()
 				inst[i] = v
 			end)
+			
+			if not success then
+				warn(err)
+			end
 		end
 
 		return inst
