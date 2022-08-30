@@ -1,6 +1,3 @@
-local Proton = script.Parent.Parent
-
-
 return function (className: string)
 	return function(properties: table): Instance
 		local success, inst = pcall(Instance.new, className)
