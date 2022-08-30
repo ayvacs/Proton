@@ -27,7 +27,9 @@ function brakeCheck(data)
 	if data.i == "Connections" then
 		for _, conn in pairs(data.v) do
 			pcall(function()
-				data.inst[conn[1]]:Connect(conn[2])
+				data.inst[conn[1]]:Connect(function(...)
+					conn[2](data.inst, ...)
+				end)
 			end)
 		end
 		return
