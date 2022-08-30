@@ -1,8 +1,34 @@
+--[[
+
+ ██▓███   ██▀███   ▒█████  ▄▄▄█████▓ ▒█████   ███▄    █ 
+▓██░  ██▒▓██ ▒ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██▒  ██▒ ██ ▀█   █
+▓██░ ██▓▒▓██ ░▄█ ▒▒██░  ██▒▒ ▓██░ ▒░▒██░  ██▒▓██  ▀█ ██▒
+▒██▄█▓▒ ▒▒██▀▀█▄  ▒██   ██░░ ▓██▓ ░ ▒██   ██░▓██▒  ▐▌██▒
+▒██▒ ░  ░░██▓ ▒██▒░ ████▓▒░  ▒██▒ ░ ░ ████▓▒░▒██░   ▓██░
+▒▓▒░ ░  ░░ ▒▓ ░▒▓░░ ▒░▒░▒░   ▒ ░░   ░ ▒░▒░▒░ ░ ▒░   ▒ ▒
+░▒ ░       ░▒ ░ ▒░  ░ ▒ ▒░     ░      ░ ▒ ▒░ ░ ░░   ░ ▒░
+░░         ░░   ░ ░ ░ ░ ▒    ░      ░ ░ ░ ▒     ░   ░ ░
+            ░         ░ ░               ░ ░           ░
+
+                        UI Library
+
+		Source code:
+		 • https://github.com/ayvacs/Proton
+		
+		Written with love by:
+		 • ayvacs :)   t.me/ayvacs
+		
+		License:
+		 • https://github.com/ayvacs/Proton/blob/main/LICENSE.md
+]]
+
+
 local Proton = {}
 
 local Functions = script.Functions
 
 
+Proton.License = require(script.License)
 Proton.Version = require(script.Version)
 
 Proton.new = require(Functions.new)
