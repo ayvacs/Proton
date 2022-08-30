@@ -1,7 +1,6 @@
 local Proton = {}
 
 local Functions = script.Functions
-local Utilities = script.Utilities
 
 
 Proton.Version = require(script.Version)
