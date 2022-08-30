@@ -1,3 +1,13 @@
+--[[
+
+	Proton
+	<src/License.lua>
+	
+	MIT License
+
+]]
+
+
 (function () end)[[
 
 Proton

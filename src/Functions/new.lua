@@ -1,3 +1,13 @@
+--[[
+
+	Proton
+	<src/Functions/new.lua>
+	
+	Returns Proton.new(), the main function for creating UI instances.
+
+]]
+
+
 -- Function used by new().
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
 function brakeCheck(data)
