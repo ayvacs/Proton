@@ -16,7 +16,8 @@
 		 • https://github.com/ayvacs/Proton
 		
 		Written by:
-		 • ayvacs :)   t.me/ayvacs
+		 • ayvacs :)
+		 • eLi
 		
 		License:
 		 • https://github.com/ayvacs/Proton/blob/main/LICENSE.md
