@@ -15,7 +15,7 @@
 		Source code:
 		 • https://github.com/ayvacs/Proton
 		
-		Written with love by:
+		Written by:
 		 • ayvacs :)   t.me/ayvacs
 		
 		License:
