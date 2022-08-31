@@ -1,5 +1,7 @@
 site_name: Proton
 repo_url: https://github.com/ayvacs/Proton
+repo_name: ayvacs/Proton
+
 theme:
   name: material
   language: en
@@ -12,3 +14,23 @@ theme:
   features:
     - navigation.instant
     - navigation.tabs
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - git-authors
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Getting started:
+    - Installation: getting-started/installation.md
+    - Creating a GUI: getting-started/creating-a-gui.md
