@@ -1,0 +1,14 @@
+site_name: Proton
+repo_url: https://github.com/ayvacs/Proton
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: slate
+    primary: black
+  font:
+    text: Source Sans Pro
+    code: Source Code Pro
+  features:
+    - navigation.instant
+    - navigation.tabs
