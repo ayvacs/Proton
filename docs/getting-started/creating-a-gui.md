@@ -20,11 +20,13 @@ local gui = new "ScreenGui" {}
 
 Let's break down the code we just ran:
 
-1. `new`, or `Proton.new`, is the Proton function which creates new instances.
+1. `new`, or `Proton.new`, is the Proton function which creates new instances. After creating an instance, `new` will `return` it, just like `Instance.new`.
 2. `"ScreenGui"` means that we will be creating a `ScreenGui` instance. You can substitute this with any Class name, such as `Frame`, `TextLabel`, or even non-UI elements.
 3. `{}` is the property table.
 
-To create a GUI that the player can see, we have to add properties to it. We can do this simply by adding entries to the property table.
+We've created a GUI, however we haven't parented it to anything, therefore the player cannot see it.
+
+If we want the GUI to be shown, we have to give it a name and parent it to `PlayerGui`. We can do this simply by adding entries to the property table.
 
 ``` lua title="The property table"
 local gui = new "ScreenGui" {
