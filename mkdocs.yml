@@ -34,3 +34,7 @@ nav:
   - Getting started:
     - Installation: getting-started/installation.md
     - Creating a GUI: getting-started/creating-a-gui.md
+  - API Reference:
+    - Proton Properties:
+      - Child: api/property/child.md
+      - Children: api/property/children.md

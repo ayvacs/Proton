@@ -40,7 +40,6 @@ end
 
 
 new = function (className: string)
-	-- Return a function, since parentheses-less functions must have only one argument, this bypasses that.
 	return function(properties: table): Instance
 		local success, inst = pcall(Instance.new, className)
 		

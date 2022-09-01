@@ -1,53 +1,43 @@
-# Creating a GUI with Proton
+# Creating a Proton UI
 
-Proton GUIs are client-sided, meaning they must be created in `LocalScript`s.
-
-To create a GUI, you'll need to `require` Proton first:
+Proton runs on the client. To create a Proton UI, you'll need to `require` Proton first:
 
 ``` lua title="Requiring Proton"
 local Proton = require(game:GetService("ReplicatedStorage").Proton) -- or wherever else you installed Proton
 ```
 
-GUIs are created with the `Proton.new` function. However, we often refer to `Proton.new` as simply `new`, simply to make our code easier to read.
+Proton UIs are created with the `Proton.new` function. However, we often refer to `Proton.new` as simply `new`, simply to make our code easier to read.
 
-GUIs are created as such:
+Proton UIs are created as such:
 
-``` lua title="Creating a GUI with Proton.new"
+``` lua title="Creating a Proton UI with Proton.new"
 local new = Proton.new
 
 local gui = new "ScreenGui" {}
 ```
 
-Let's break down the code we just ran:
+We've created a Proton UI! As with any ScreenGui, in order to make it visible to the client, it needs to be parented to the `PlayerGui`. We'll do this by adding a `Parent` to the property table. We'll also give it a name.
 
-1. `new`, or `Proton.new`, is the Proton function which creates new instances. After creating an instance, `new` will `return` it, just like `Instance.new`.
-2. `"ScreenGui"` means that we will be creating a `ScreenGui` instance. You can substitute this with any Class name, such as `Frame`, `TextLabel`, or even non-UI elements.
-3. `{}` is the property table.
-
-We've created a GUI, however we haven't parented it to anything, therefore the player cannot see it.
-
-If we want the GUI to be shown, we have to give it a name and parent it to `PlayerGui`. We can do this simply by adding entries to the property table.
-
-``` lua title="The property table"
+``` lua title="Adding entries to the property table"
 local gui = new "ScreenGui" {
-	Name = "This is my ScreenGui",
-	Parent = game:GetService("Players").LocalPlayer.PlayerGui
+	Parent = game:GetService("Players").LocalPlayer.PlayerGui,
+	Name = "proton_ui"
 }
 ```
 
-Great! We've created a GUI named `"This is my ScreenGui"` and we can now parent UI elements to it, such as `Frame`s and `TextLabel`s, to render content.
+We can now create UI elements, such as `Frame` and `TextLabel`, to render content inside of our Proton UI.
 
 ## Proton Properties
 
-Proton Properties are special properties that you can use to enhance your code.
+Proton Properties are special properties that you can use to enhance Proton UIs.
 
-There are multiple Proton Properties that you may use in your code, but let's take a look at just two of them for now: `Child` and `Children`.
+There are several, but let's take a look at just two of them for now: `Child` and `Children`.
 
-`Child` and `Children` are extremely simple: they create Instances and parent them to the specified Instance. The difference between the two is that `Child` will create only one child, whereas `Children` will create an entire array of children.
+`Child` and `Children` are extremely simple: they create Instances and parent them to the specified Instance. `Child` will create only one instance, whereas `Children` will create an array of instances.
 
 ``` lua title="Adding one child, a Frame, to a ScreenGui"
 local gui = new "ScreenGui" {
-	Name = "This is my ScreenGui",
+	Name = "proton_ui",
 	Parent = game:GetService("Players").LocalPlayer.PlayerGui,
 
 	Child = new "Frame" {
@@ -61,7 +51,7 @@ local gui = new "ScreenGui" {
 
 ``` lua title="Adding multiple children, a UIListLayout and two TextButtons, to a ScreenGui"
 local gui = new "ScreenGui" {
-	Name = "This is my ScreenGui",
+	Name = "proton_ui",
 	Parent = game:GetService("Players").LocalPlayer.PlayerGui,
 
 	Children = {
