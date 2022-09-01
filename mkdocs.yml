@@ -30,12 +30,17 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - admonition
 
 nav:
   - Home: index.md
-  - Getting started:
-    - Installation: getting-started/installation.md
-    - Creating a GUI: getting-started/creating-a-gui.md
+
+  - Tutorials:
+    - Get Started: tutorials/get-started.md
+    - The Basics:
+      - Creating a UI: tutorials/the-basics/creating-a-ui.md
+      - Proton Properties: tutorials/the-basics/proton-properties.md
+
   - API Reference:
     - Functions:
       - new: api/function/new.md
