@@ -5,6 +5,8 @@ repo_name: ayvacs/Proton
 theme:
   name: material
   language: en
+  logo: images/logos/white/logo.png
+  favicon: images/logos/white/logo.png
   palette:
     scheme: slate
     primary: black
@@ -37,4 +39,4 @@ nav:
   - API Reference:
     - Proton Properties:
       - Child: api/property/child.md
-      - Children: api/property/children.md
+      - Children: api/property/childrens.md
