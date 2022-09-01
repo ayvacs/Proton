@@ -4,7 +4,7 @@ The `Children` Proton Property determines the hierarchical children of the `Inst
 
 Input one array of objects. When the `Instance` is created, each of the objects in that array will be parented to the `Instance`, if they aren't already.
 
-```lua
+```lua hl_lines="15"
 local ch1 = new "UIListLayout" {}
 local ch2 = new "TextButton" {
 	Text = "This button will render on the left",
@@ -23,7 +23,7 @@ local gui = new "ScreenGui" {
 }
 ```
 
-```lua
+```lua hl_lines="5 6 7 8 9 10 11 12 13 14 15"
 local gui = new "ScreenGui" {
     Name = "proton_ui",
     Parent = game:GetService("Players").LocalPlayer.PlayerGui,

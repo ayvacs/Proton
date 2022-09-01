@@ -4,7 +4,7 @@ The `Child` Proton Property determines the hierarchical child of the `Instance`.
 
 Input one object. When the `Instance` is created, the object will be parented to the `Instance`, if it isn't already.
 
-```lua
+```lua hl_lines="12"
 local frame = new "Frame" {
 		Name = "A brand new Frame!",
 		AnchorPoint = Vector2.new(.5, .5),
@@ -23,7 +23,7 @@ print(frame.Parent == gui)
 -- true
 ```
 
-```lua
+```lua hl_lines="5 6 7 8 9 10"
 local gui = new "ScreenGui" {
 	Name = "proton_ui",
 	Parent = game:GetService("Players").LocalPlayer.PlayerGui,

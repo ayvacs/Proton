@@ -40,3 +40,4 @@ nav:
     - Proton Properties:
       - Child: api/property/child.md
       - Children: api/property/childrens.md
+      - Connections: api/property/connections.md
