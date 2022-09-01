@@ -37,7 +37,9 @@ nav:
     - Installation: getting-started/installation.md
     - Creating a GUI: getting-started/creating-a-gui.md
   - API Reference:
+    - Functions:
+      - new: api/function/new.md
     - Proton Properties:
       - Child: api/property/child.md
-      - Children: api/property/childrens.md
+      - Children: api/property/children.md
       - Connections: api/property/connections.md
