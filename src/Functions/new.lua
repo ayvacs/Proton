@@ -8,10 +8,8 @@
 ]]
 
 
--- Function used by new().
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
 function brakeCheck(data)
-	
 	if data.i == "Child" then
 		data.v.Parent = data.inst
 		return
@@ -26,9 +24,13 @@ function brakeCheck(data)
 	
 	if data.i == "Connections" then
 		for _, conn in pairs(data.v) do
-			pcall(function()
+			local success = pcall(function()
 				data.inst[conn[1]]:Connect(conn[2])
 			end)
+
+			if not success then
+				warn("Unable to connect")
+			end
 		end
 		return
 	end
@@ -37,17 +39,14 @@ function brakeCheck(data)
 end
 
 
-new = function (className: string)
-	-- Return a function, since parentheses-less functions must have only one argument, this bypasses that.
+return function (className: string)
 	return function(properties: table): Instance
 		local success, inst = pcall(Instance.new, className)
 		
-		-- If unable to create the instance:
-		if not (success and inst) then
+		if not success and inst then
 			return warn("Unable to create instance")
 		end
 		
-		-- Apply properties
 		for i, v in pairs(properties) do
 			local success, err = pcall(function()
 				inst[i] = v
@@ -62,5 +61,3 @@ new = function (className: string)
 		return inst
 	end
 end
-
-return new
