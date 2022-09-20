@@ -43,7 +43,7 @@ return function (className: string)
 	return function(properties: table): Instance
 		local success, inst = pcall(Instance.new, className)
 		
-		if not success and inst then
+		if (not success) or (not inst) then
 			return warn("Unable to create instance")
 		end
 		
