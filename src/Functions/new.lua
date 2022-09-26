@@ -11,13 +11,17 @@
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
 function brakeCheck(data)
 	if data.i == "Child" then
-		data.v.Parent = data.inst
+		pcall(function()
+			data.v.Parent = data.inst
+		end)
 		return
 	end
 	
 	if data.i == "Children" then
 		for _, inst in pairs(data.v) do
-			inst.Parent = data.inst
+			pcall(function()
+				inst.Parent = data.inst
+			end)
 		end
 		return
 	end
@@ -38,6 +42,9 @@ function brakeCheck(data)
 	warn(data.err)
 end
 
+-- syntax:
+-- local variable = new "ClassName" {Properties}
+-- local ui = new "ScreenGui" { Name = "ui", Parent = game.Players.LocalPlayer.ScreenGui }
 
 return function (className: string)
 	return function(properties: table): Instance
