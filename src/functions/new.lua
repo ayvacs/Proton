@@ -18,9 +18,13 @@ function AddSpecialProperties(data: table)
     elseif data.i == "Connections" then
         for _, connection in pairs(data.v) do
             pcall(function()
-                data.inst[conn[1]]):Connect(conn[2])
+                data.inst[connection[1]]:Connect(connection[2])
             end)
         end
+    elseif string.sub(data.i, 1, 1) == "*" then
+        pcall(function()
+            data.inst[string.sub(data.i, 2, string.len(data.i))]:Connect(data.v)
+        end)
     end
 
 
@@ -28,7 +32,6 @@ function AddSpecialProperties(data: table)
     warn(data.err)
     return nil, warn("Unable to set property, " .. (tostring(err) or ""))
 end
-
 
 
 return function(className: string)
