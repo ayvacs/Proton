@@ -47,9 +47,13 @@ Special Properties are used when creating a function with `new()` and allow you 
 
 ### List
 
-#### Children, Child
+#### Children
 
-Parents given instance to the new instance. You can use "Children" to append one or multiple instances, or "Child" to append only one.
+Parents given instance(s) to the new instance.
+
+```lua
+new "ClassName" { ["Children"] = { Instances } }
+```
 
 ```lua
 new "ScreenGui" {
@@ -57,8 +61,20 @@ new "ScreenGui" {
 }
 ```
 
+#### Connections
+
+Applies connection(s) to the new instance.
+
 ```lua
-new "ScreenGui" {
-    ["Child"] = { new("Frame"){}}
+new "ClassName" { ["Connections"] = { {ConnectionName, Function}, ... } }
+```
+
+```lua
+new "TextButton" {
+    ["Connections"] = {
+        { "MouseButton1Click", (function() print("Left mouse button clicked") end) },
+        { "MouseButton1Click", (function() print("This function runs at the same time as the above one") end) },
+        { "MouseButton2Down", (function() print("Right mouse button down") end) }
+    }
 }
 ```

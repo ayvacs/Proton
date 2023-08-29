@@ -8,13 +8,6 @@
 -- Special Properties code
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
 function AddSpecialProperties(data: table)
-    if data.i == "Child" then
-        pcall(function()
-            data.v.Parent = data.inst
-        end)
-        return
-    end
-    
     if data.i == "Children" then
         for _, inst in pairs(data.v) do
             pcall(function()
@@ -22,7 +15,15 @@ function AddSpecialProperties(data: table)
             end)
         end
         return
+    elseif data.i == "Connections" then
+        for _, connection in pairs(data.v) do
+            pcall(function()
+                data.inst[conn[1]]):Connect(conn[2])
+            end)
+        end
     end
+
+
 
     warn(data.err)
     return nil, warn("Unable to set property, " .. (tostring(err) or ""))
