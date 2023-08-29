@@ -1,4 +1,19 @@
-site_name: Proton UI for Roblox
+site_name: Proton UI
+
+repo_name: ayvacs/Proton
+repo_url: https://github.com/ayvacs/Proton
+
+copyright: Copyright &copy; 2023 ayvacs
+
+
+nav:
+    - Getting started:
+        - Home: index.md
+        - Import Proton: tutorial/import.md
+    - Connections: apply-connection.md
+    - Special Properties: special-properties.md
+
+
 theme:
     name: material
     logo: assets/logo.png
@@ -8,6 +23,8 @@ theme:
     features:
         - content.code.copy
         - content.code.select
+        - navigation.instant
+        - navigation.tabs
 
 markdown_extensions:
     - pymdownx.highlight:
