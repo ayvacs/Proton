@@ -1,8 +1,34 @@
 --[[
 
-    Returns Proton.new(), the main function for creating UI instances.
+    The main function for creating UI instances.
 
 ]]
+
+
+-- Special Properties code
+-- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
+function AddSpecialProperties(data: table)
+    if data.i == "Child" then
+        pcall(function()
+            data.v.Parent = data.inst
+        end)
+        return
+    end
+    
+    if data.i == "Children" then
+        for _, inst in pairs(data.v) do
+            pcall(function()
+                data.v.Parent = data.inst
+            end)
+        end
+        return
+    end
+
+    warn(data.err)
+    return nil, warn("Unable to set property, " .. (tostring(err) or ""))
+end
+
+
 
 return function(className: string)
     return function(properties: table): Instance
@@ -18,7 +44,7 @@ return function(className: string)
             end)
 
             if (not success) then
-                return nil, warn("Unable to set property, " .. (tostring(err) or ""))
+                AddSpecialProperties({inst = inst, i = i, v = v, err = err})
             end
         end
 
