@@ -1,0 +1,7 @@
+site_name: Proton UI for Roblox
+theme:
+    name: material
+    logo: assets/logo.png
+    palette:
+        scheme: slate
+        primary: black
