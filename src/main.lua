@@ -1,4 +1,8 @@
 -- Proton UI library
+-- Copyright (c) 2023 ayvacs
+
+-- Documentation:
+-- https://ave.is-a.dev/Proton
 
 local Proton = {}
 

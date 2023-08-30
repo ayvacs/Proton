@@ -9,6 +9,7 @@ copyright: Copyright &copy; 2023 ayvacs
 nav:
     - Getting started:
         - Home: index.md
+        - Compile a build: tutorial/build.md
         - Import Proton: tutorial/import.md
     - Connections: apply-connection.md
     - Special Properties: special-properties.md

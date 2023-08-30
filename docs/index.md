@@ -4,7 +4,12 @@ A flexible and powerful UI library that allows you to create UI objects (and oth
 
 ```lua
 local SGui = new "ScreenGui" {
-    ["Children"] = {new("Frame"){}, new("ImageLabel"){}}
+    ["Children"] = {
+        new("Frame"){},
+        new("TextButton"){
+            ["*MouseButton1Click"] = (function() print("Left mouse button clicked") end)
+        }
+    }
 
     ["Name"] = "My Gui",
     ["Parent"] = LocalPlayer.PlayerGui
