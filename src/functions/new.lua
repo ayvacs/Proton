@@ -7,30 +7,30 @@
 
 -- Special Properties code
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
-function AddSpecialProperties(data: table)
-    if data.i == "Children" then
-        for _, inst in pairs(data.v) do
+function AddSpecialProperties(instance, PropertyName, PropertyValue, initialError)
+    if PropertyName == "Children" then
+        for _, inst in pairs(PropertyValue) do
             pcall(function()
-                data.v.Parent = data.inst
+                PropertyValue.Parent = instance
             end)
         end
         return
-    elseif data.i == "Connections" then
-        for _, connection in pairs(data.v) do
+    elseif PropertyName == "Connections" then
+        for _, connection in pairs(PropertyValue) do
             pcall(function()
-                data.inst[connection[1]]:Connect(connection[2])
+                instance[connection[1]]:Connect(connection[2])
             end)
         end
-    elseif string.sub(data.i, 1, 1) == "*" then
+        return
+    -- connections
+    elseif string.sub(PropertyName, 1, 1) == "*" then
         pcall(function()
-            data.inst[string.sub(data.i, 2, string.len(data.i))]:Connect(data.v)
+            instance[string.sub(PropertyName, 2, string.len(PropertyName))]:Connect(PropertyValue)
         end)
+        return
     end
 
-
-
-    warn(data.err)
-    return nil, warn("Unable to set property, " .. (tostring(err) or ""))
+    return nil, warn("Unable to set property ("..(tostring(initialError) or "")..")")
 end
 
 
@@ -48,7 +48,7 @@ return function(className: string)
             end)
 
             if (not success) then
-                AddSpecialProperties({inst = inst, i = i, v = v, err = err})
+                AddSpecialProperties(inst, i, v, err)
             end
         end
 
