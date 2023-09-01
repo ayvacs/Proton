@@ -7,7 +7,7 @@
 
 -- Special Properties code
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
-function AddSpecialProperties(instance, PropertyName, PropertyValue, initialError)
+function AddSpecialProperties(instance, PropertyName: string, PropertyValue: string, initialError)
     if PropertyName == "Children" then
         for _, inst in pairs(PropertyValue) do
             pcall(function()

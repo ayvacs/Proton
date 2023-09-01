@@ -1,4 +1,4 @@
-site_name: Proton UI
+site_name: Proton
 
 repo_name: ayvacs/Proton
 repo_url: https://github.com/ayvacs/Proton
@@ -17,7 +17,10 @@ nav:
 
 theme:
     name: material
+    favicon: assets/logo.png
     logo: assets/logo.png
+    icon:
+        repo: fontawesome/brands/github
     palette:
         scheme: slate
         primary: black

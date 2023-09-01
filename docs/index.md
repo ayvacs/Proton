@@ -1,4 +1,4 @@
-# Proton UI Library
+# Proton
 
 A flexible and powerful UI library that allows you to create instances and give them functionality easily, like this:
 
