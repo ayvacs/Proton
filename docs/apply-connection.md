@@ -21,7 +21,7 @@ new "TextButton" {
     ["Name"] = "My Text Button",
     ["Parent"] = ScreenGui,
 
-    ["*MouseButton1Click"] = (function() print("Left mouse button clicked") end)
+    ["*MouseButton1Click"] = (function() print("Left mouse button clicked") end),
     
     ["Connections"] = {
         { "MouseButton1Click", (function() print("Left mouse button clicked") end) },

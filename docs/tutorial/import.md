@@ -6,3 +6,25 @@ Import Proton to your script using `require()`. You can use any name for the `Pr
 local Proton = require(--[[Proton script location]])
 local new = Proton.require("new")
 ```
+
+## Setup
+
+### Verbose Mode
+
+Forces Proton to print extra debug information that is not necessary for normal use but may be required in certain debugging scenarios. Verbose Mode can be enabled or disabled at any time. By default, it is disabled.
+
+To enable Verbose Mode, insert this line in any script. (If you don't plan on disabling it later, we recommend putting it in `main.lua` any time after the `verbose` variable is defined.)
+
+```lua
+Proton.verbose(true)
+```
+
+To disable it later, call this code:
+```lua
+Proton.verbose(false)
+```
+
+To check for Verbose Mode, call this function:
+```lua
+Proton.verboseEnabled()
+```

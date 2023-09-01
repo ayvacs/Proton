@@ -5,9 +5,10 @@ A flexible and powerful UI library that allows you to create instances and give 
 ```lua
 local SGui = new "ScreenGui" {
     ["Name"] = "My Gui",
-    ["Parent"] = LocalPlayer.PlayerGui
+    ["Parent"] = LocalPlayer.PlayerGui,
     ["Children"] = {
         new "TextButton" {
+            ["Size"] = UDim2.new(0, 250, 0, 100),
             ["Text"] = "Click me to do something cool",
             ["*MouseButton1Click"] = (function()
                 print("Left mouse button clicked")
