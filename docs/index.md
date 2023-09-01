@@ -7,7 +7,7 @@ local SGui = new "ScreenGui" {
     ["Name"] = "My Gui",
     ["Parent"] = LocalPlayer.PlayerGui
     ["Children"] = {
-        new ("TextButton") {
+        new "TextButton" {
             ["Text"] = "Click me to do something cool",
             ["*MouseButton1Click"] = (function()
                 print("Left mouse button clicked")
@@ -35,9 +35,7 @@ new "ClassName" {
 }
 ```
 
-For more about applying connections see [Apply connection to new instance](/apply-connection).
-
-Furthermore, Special Properties to easily, nonverbosely add functionality to your instances. For example, use the `Children` Special Property to parents the given instance(s) to the new instance:
+Furthermore, use Special Properties to easily, nonverbosely add functionality to your instances. For example, use the `Children` Special Property to parents the given instance(s) to the new instance:
 
 ```lua
 new "ClassName" {
