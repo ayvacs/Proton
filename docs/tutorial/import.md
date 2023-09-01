@@ -14,7 +14,7 @@ local new = Proton.require("new")
 
 ### Verbose Mode
 
-Forces Proton to print extra debug information that is not necessary for normal use but may be required in certain debugging scenarios. Verbose Mode can be enabled or disabled at any time. By default, it is disabled.
+Forces Proton to print extra debug information that is not necessary for normal use but may be required in certain scenarios, i.e. debugging. Verbose Mode can be enabled or disabled at any time. By default, it is disabled.
 
 To enable Verbose Mode, insert this line in any script. (If you don't plan on disabling it later, we recommend putting it in `main.lua` any time after the `verbose` variable is defined.)
 
