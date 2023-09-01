@@ -2,7 +2,7 @@
 
 A flexible and powerful UI library that allows you to create instances and give them functionality easily, like this:
 
-```lua
+``` lua linenums="1"
 local SGui = new "ScreenGui" {
     ["Name"] = "My Gui",
     ["Parent"] = LocalPlayer.PlayerGui,
@@ -22,7 +22,7 @@ local SGui = new "ScreenGui" {
 
 The syntax basically boils down to this.
 
-```lua
+``` lua linenums="1"
 local Instance = new "ClassName" { Properties }
 ```
 
@@ -30,7 +30,7 @@ What sets Proton apart from other UI libraries is that you can use the `Properti
 
 To apply a connection, append an asterisk to the connection name, like so:
 
-```lua
+``` lua linenums="1"
 new "ClassName" {
     ["*ConnectionName"] = (function)
 }
@@ -38,7 +38,7 @@ new "ClassName" {
 
 Furthermore, use Special Properties to easily, nonverbosely add functionality to your instances. For example, use the `Children` Special Property to parents the given instance(s) to the new instance:
 
-```lua
+``` lua linenums="1"
 new "ClassName" {
     ["Children"] = {
         Instances

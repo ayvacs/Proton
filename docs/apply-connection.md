@@ -2,13 +2,13 @@
 
 When creating a new instance with `new()` you can easily apply a connection to it by simply adding it to the property table, appended with an asterisk, like such:
 
-```lua
+``` lua linenums="1"
 new "ClassName" {
     ["*ConnectionName"] = func
 }
 ```
 
-```lua
+``` lua linenums="1"
 new "TextButton" {
     ["*MouseButton1Click"] = (function() (print("Left mouse button clicked")) end)
 }
@@ -16,7 +16,7 @@ new "TextButton" {
 
 You can of course add the "Connections" Special Property, and normal properties, at the same time:
 
-```lua
+``` lua linenums="1"
 new "TextButton" {
     ["Name"] = "My Text Button",
     ["Parent"] = ScreenGui,

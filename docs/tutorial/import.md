@@ -1,8 +1,11 @@
 # Import Proton
 
-Import Proton to your script using `require()`. You can use any name for the `Proton` and `new` variables if you wish.
+Import Proton to your script using `require()`, then import the `new` function with `Proton.require()`. You can use any name for the `Proton` and `new` variables if you wish.
 
-```lua
+!!! warning
+    Please keep in mind that the built-in `require` function is different from the `Proton.require` function.
+
+``` lua linenums="1"
 local Proton = require(--[[Proton script location]])
 local new = Proton.require("new")
 ```
@@ -15,16 +18,16 @@ Forces Proton to print extra debug information that is not necessary for normal 
 
 To enable Verbose Mode, insert this line in any script. (If you don't plan on disabling it later, we recommend putting it in `main.lua` any time after the `verbose` variable is defined.)
 
-```lua
+``` lua linenums="1"
 Proton.verbose(true)
 ```
 
 To disable it later, call this code:
-```lua
+``` lua linenums="1"
 Proton.verbose(false)
 ```
 
 To check for Verbose Mode, call this function:
-```lua
+``` lua linenums="1"
 Proton.verboseEnabled()
 ```

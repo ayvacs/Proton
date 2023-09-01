@@ -8,11 +8,11 @@ Special Properties are used when creating a function with `new()` and allow you 
 
 Parents given instance(s) to the new instance.
 
-```lua
+``` lua linenums="1"
 new "ClassName" { ["Children"] = { Instances } }
 ```
 
-```lua
+``` lua linenums="1"
 new "ScreenGui" {
     ["Children"] = { ExistingInstance, new("Frame"){}}
 }
@@ -22,11 +22,11 @@ new "ScreenGui" {
 
 Applies connection(s) to the new instance.
 
-```lua
+``` lua linenums="1"
 new "ClassName" { ["Connections"] = { {ConnectionName, Function}, ... } }
 ```
 
-```lua
+``` lua linenums="1"
 new "TextButton" {
     ["Connections"] = {
         { "MouseButton1Click", (function() print("Left mouse button clicked") end) },
