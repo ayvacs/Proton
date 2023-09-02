@@ -19,7 +19,7 @@ return function(className: string)
         local success, inst = pcall(Instance.new, className)
         
         if (not success) or (not inst) then
-            return nil, warn("Unable to create instance")
+            return nil, Proton.print("error", "Unable to create instance")
         end
 
         for propertyName, propertyValue in pairs(properties) do
@@ -35,7 +35,7 @@ return function(className: string)
                             inst.Parent = inst
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("warn", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                            Proton.print("print", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
                         end
                     end
                 elseif propertyName == "Connections" then
@@ -44,7 +44,7 @@ return function(className: string)
                             inst[connection[1]]:Connect(connection[2])
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("warn", "Successfully connected " .. (tostring(connection[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
+                            Proton.print("print", "Successfully connected " .. (tostring(connection[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
                         end
                     end
                     return
@@ -55,11 +55,11 @@ return function(className: string)
                         inst[connectionName]:Connect(propertyValue)
                     end)
                     if success and Proton.verboseEnabled() then
-                        Proton.print("warn", "Successfully connected " .. (tostring(connectionName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
+                        Proton.print("print", "Successfully connected " .. (tostring(connectionName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
                     end
                     return
                 else
-                    return nil, warn("Unable to set property ("..(tostring(err) or "")..")")
+                    return nil, Proton.print("error", "Unable to set property ("..(tostring(err) or "")..")")
                 end
             end
         end
