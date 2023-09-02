@@ -10,7 +10,9 @@ new "ClassName" {
 
 ``` lua linenums="1"
 new "TextButton" {
-    ["*MouseButton1Click"] = (function() (print("Left mouse button clicked")) end)
+    ["*MouseButton1Click"] = (function()
+        print("Left mouse button clicked")
+    end)
 }
 ```
 
@@ -21,11 +23,17 @@ new "TextButton" {
     ["Name"] = "My Text Button",
     ["Parent"] = ScreenGui,
 
-    ["*MouseButton1Click"] = (function() print("Left mouse button clicked") end),
+    ["*MouseButton1Click"] = (function()
+        print("Left mouse button clicked")
+    end),
     
     ["Connections"] = {
-        { "MouseButton1Click", (function() print("Left mouse button clicked") end) },
-        { "MouseButton2Down", (function() print("Right mouse button down") end) }
+        { "MouseButton1Click", (function()
+            print("Left mouse button clicked")
+        end) },
+        { "MouseButton2Down", (function()
+            print("Right mouse button down")
+        end) }
     }
 }
 ```

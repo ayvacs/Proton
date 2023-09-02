@@ -9,12 +9,17 @@ Special Properties are used when creating a function with `new()` and allow you 
 Parents given instance(s) to the new instance.
 
 ``` lua linenums="1"
-new "ClassName" { ["Children"] = { Instances } }
+new "ClassName" {
+    ["Children"] = { Instances }
+}
 ```
 
 ``` lua linenums="1"
 new "ScreenGui" {
-    ["Children"] = { ExistingInstance, new("Frame"){}}
+    ["Children"] = {
+        ExistingInstance,
+        new("Frame"){}
+    }
 }
 ```
 
@@ -23,7 +28,12 @@ new "ScreenGui" {
 Applies connection(s) to the new instance.
 
 ``` lua linenums="1"
-new "ClassName" { ["Connections"] = { {ConnectionName, Function}, ... } }
+new "ClassName" {
+    ["Connections"] = {
+        {ConnectionName, Function},
+        ... 
+    }
+}
 ```
 
 ``` lua linenums="1"
