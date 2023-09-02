@@ -9,40 +9,40 @@ Proton.print("print", "Loading module <new.lua>")
 
 -- Special Properties code
 -- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
-function AddSpecialProperties(instance, PropertyName: string, PropertyValue: string, initialError)
-    if PropertyName == "Children" then
-        for _, inst in pairs(PropertyValue) do
+function AddSpecialProperties(inst, propertyName: string, propertyValue: string, err)
+    if propertyName == "Children" then
+        for _, inst in pairs(propertyValue) do
             local success = pcall(function()
-                inst.Parent = instance
+                inst.Parent = inst
             end)
             if success and Proton.verboseEnabled() then
-                Proton.print("warn", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (instance.Name or tostring(instance) or "?"))
+                Proton.print("warn", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
             end
         end
         return
-    elseif PropertyName == "Connections" then
-        for _, connection in pairs(PropertyValue) do
+    elseif propertyName == "Connections" then
+        for _, connection in pairs(propertyValue) do
             local success = pcall(function()
-                instance[connection[1]]:Connect(connection[2])
+                inst[connection[1]]:Connect(connection[2])
             end)
             if success and Proton.verboseEnabled() then
-                Proton.print("warn", "Successfully connected " .. (tostring(connection[1]) or "?") .. " to " .. (instance.Name or tostring(instance) or "?") .. " via property")
+                Proton.print("warn", "Successfully connected " .. (tostring(connection[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
             end
         end
         return
     -- connections
-    elseif string.sub(PropertyName, 1, 1) == "*" then
-        local connectionName = string.sub(PropertyName, 2, string.len(PropertyName))
+    elseif string.sub(propertyName, 1, 1) == "*" then
+        local connectionName = string.sub(propertyName, 2, string.len(propertyName))
         local success = pcall(function()
-            instance[connectionName]:Connect(PropertyValue)
+            inst[connectionName]:Connect(propertyValue)
         end)
         if success and Proton.verboseEnabled() then
-            Proton.print("warn", "Successfully connected " .. (tostring(connectionName) or "?") .. " to " .. (instance.Name or tostring(instance) or "?") .. " via asterisk")
+            Proton.print("warn", "Successfully connected " .. (tostring(connectionName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
         end
         return
     end
 
-    return nil, warn("Unable to set property ("..(tostring(initialError) or "")..")")
+    return nil, warn("Unable to set property ("..(tostring(err) or "")..")")
 end
 
 
@@ -54,13 +54,13 @@ return function(className: string)
             return nil, warn("Unable to create instance")
         end
 
-        for i, v in pairs(properties) do
+        for propertyName, propertyValue in pairs(properties) do
             local success, err = pcall(function()
                 inst[i] = v
             end)
 
             if (not success) then
-                AddSpecialProperties(inst, i, v, err)
+                AddSpecialProperties(inst, propertyName, propertyValue, err)
             end
         end
 
