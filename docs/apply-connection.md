@@ -16,7 +16,17 @@ new "TextButton" {
 }
 ```
 
-You can of course add the "Connections" Special Property, and normal properties, at the same time:
+Arguments will still function as usual:
+
+``` lua linenums="1"
+new "Part" {
+    ["*Touched"] = (function(object)
+        print("Part was touched by", object:GetFullName())
+    end)
+}
+```
+
+If you want to connect multiple functions to a single event, use the "Connections" Special Property instead.
 
 ``` lua linenums="1"
 new "TextButton" {
@@ -37,5 +47,3 @@ new "TextButton" {
     }
 }
 ```
-
-With this method you cannot apply multiple connections of the same name to an instance. Instead, you can use the "Connections" Special Property.
