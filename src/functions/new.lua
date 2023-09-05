@@ -7,13 +7,6 @@
 local Proton = require(script.Parent.Parent)
 Proton.print("print", "Loading module <new.lua>")
 
--- Special Properties code
--- If a property is unable to be set, first check if it is a "special" property (Child, Children, ...) and if not, error.
-function AddSpecialProperties(inst, propertyName: string, propertyValue: string, err)
-    
-end
-
-
 return function(className: string)
     return function(properties: table): Instance
         local success, inst = pcall(Instance.new, className)
