@@ -1,10 +1,10 @@
-# Apply connection to new instance
+# Connect event to instance
 
-When creating a new instance with `new()` you can easily apply a connection to it by simply adding it to the property table, appended with an asterisk, like such:
+When creating a new instance with `new()` you can easily connect an event to it by simply adding it to the property table, appended with an asterisk, like such:
 
 ``` lua linenums="1"
 new "ClassName" {
-    ["*ConnectionName"] = func
+    ["*EventName"] = func
 }
 ```
 
@@ -26,7 +26,7 @@ new "Part" {
 }
 ```
 
-If you want to connect multiple functions to a single event, use the "Connections" Special Property instead.
+If you want to connect multiple functions to a single event, use the "Events" Special Property instead.
 
 ``` lua linenums="1"
 new "TextButton" {
@@ -37,7 +37,7 @@ new "TextButton" {
         print("Left mouse button clicked")
     end),
     
-    ["Connections"] = {
+    ["Events"] = {
         { "MouseButton1Click", (function()
             print("Left mouse button clicked")
         end) },

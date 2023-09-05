@@ -23,14 +23,14 @@ new "ScreenGui" {
 }
 ```
 
-### Connections
+### Events
 
-Applies connection(s) to the new instance.
+Connects events to the new instance.
 
 ``` lua linenums="1"
 new "ClassName" {
-    ["Connections"] = {
-        {ConnectionName, Function},
+    ["Events"] = {
+        {EventName, Function},
         ... 
     }
 }
@@ -38,7 +38,7 @@ new "ClassName" {
 
 ``` lua linenums="1"
 new "TextButton" {
-    ["Connections"] = {
+    ["Events"] = {
         { "MouseButton1Click", (function() print("Left mouse button clicked") end) },
         { "MouseButton1Click", (function() print("This function runs at the same time as the above one") end) },
         { "MouseButton2Down", (function() print("Right mouse button down") end) }

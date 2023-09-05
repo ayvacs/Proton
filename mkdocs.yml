@@ -11,7 +11,7 @@ nav:
         - Home: index.md
         - Compile a build: tutorial/build.md
         - Import Proton: tutorial/import.md
-    - Connections: apply-connection.md
+    - Events: connect-event.md
     - Special Properties: special-properties.md
 
 

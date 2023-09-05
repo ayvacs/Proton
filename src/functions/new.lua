@@ -29,26 +29,32 @@ return function(className: string)
                         end)
                         if success and Proton.verboseEnabled() then
                             Proton.print("print", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                        elseif not success then
+                            Proton.print("warn", "Could not parent " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
                         end
                     end
-                elseif propertyName == "Connections" then
-                    for _, connection in pairs(propertyValue) do
+                elseif propertyName == "Events" then
+                    for _, event in pairs(propertyValue) do
                         local success = pcall(function()
-                            inst[connection[1]]:Connect(connection[2])
+                            inst[event[1]]:Connect(event[2])
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("print", "Successfully connected " .. (tostring(connection[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
+                            Proton.print("print", "Successfully connected " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
+                        elseif not success then
+                            Proton.print("warn", "Could not connect " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
                         end
                     end
                     return
-                -- connections
+                -- Events
                 elseif string.sub(propertyName, 1, 1) == "*" then
-                    local connectionName = string.sub(propertyName, 2, string.len(propertyName))
+                    local eventName = string.sub(propertyName, 2, string.len(propertyName))
                     local success = pcall(function()
-                        inst[connectionName]:Connect(propertyValue)
+                        inst[eventName]:Connect(propertyValue)
                     end)
                     if success and Proton.verboseEnabled() then
-                        Proton.print("print", "Successfully connected " .. (tostring(connectionName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
+                        Proton.print("print", "Successfully connected " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
+                    elseif not success then
+                        Proton.print("warn", "Could not connect " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
                     end
                     return
                 else

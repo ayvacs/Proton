@@ -26,13 +26,13 @@ The syntax basically boils down to this.
 local Instance = new "ClassName" { Properties }
 ```
 
-What sets Proton apart from other UI libraries is that you can use the `Properties` table to not only set properties but to apply connections, parent instances, and more.
+What sets Proton apart from other UI libraries is that you can use the `Properties` table to not only set properties but to connect events, parent instances, and more.
 
-To apply a connection, append an asterisk to the connection name, like so:
+To connect an event, append an asterisk to the event name, like so:
 
 ``` lua linenums="1"
 new "ClassName" {
-    ["*ConnectionName"] = (function)
+    ["*EventName"] = (function)
 }
 ```
 
