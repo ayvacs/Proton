@@ -28,9 +28,9 @@ return function(className: string)
                             target.Parent = inst
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("print", "Successfully parented " .. (target.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                            Proton.print("print", "Successfully parented " .. (target.Name or "?") .. " to " .. (inst.Name or "?"))
                         elseif not success then
-                            Proton.print("warn", "Could not parent " .. (target.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                            Proton.print("warn", "Could not parent " .. (target.Name or "?") .. " to " .. (inst.Name or "?"))
                         end
                     end
                 elseif propertyName == "Events" then
@@ -39,9 +39,9 @@ return function(className: string)
                             inst[event[1]]:Connect(event[2])
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("print", "Successfully connected " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
+                            Proton.print("print", "Successfully connected " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or "?") .. " via property")
                         elseif not success then
-                            Proton.print("warn", "Could not connect " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via property")
+                            Proton.print("warn", "Could not connect " .. (tostring(event[1]) or "?") .. " to " .. (inst.Name or "?") .. " via property")
                         end
                     end
                     return
@@ -52,9 +52,9 @@ return function(className: string)
                         inst[eventName]:Connect(propertyValue)
                     end)
                     if success and Proton.verboseEnabled() then
-                        Proton.print("print", "Successfully connected " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
+                        Proton.print("print", "Successfully connected " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or "?") .. " via asterisk")
                     elseif not success then
-                        Proton.print("warn", "Could not connect " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or tostring(inst) or "?") .. " via asterisk")
+                        Proton.print("warn", "Could not connect " .. (tostring(eventName) or "?") .. " to " .. (inst.Name or "?") .. " via asterisk")
                     end
                     return
                 else
