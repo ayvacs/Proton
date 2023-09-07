@@ -23,14 +23,14 @@ return function(className: string)
             if (not success) then
                 -- check for special property
                 if propertyName == "Children" then
-                    for _, inst in pairs(propertyValue) do
+                    for _, target in pairs(propertyValue) do
                         local success = pcall(function()
-                            inst.Parent = inst
+                            target.Parent = inst
                         end)
                         if success and Proton.verboseEnabled() then
-                            Proton.print("print", "Successfully parented " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                            Proton.print("print", "Successfully parented " .. (target.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
                         elseif not success then
-                            Proton.print("warn", "Could not parent " .. (inst.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
+                            Proton.print("warn", "Could not parent " .. (target.Name or tostring(inst) or "?") .. " to " .. (inst.Name or tostring(inst) or "?"))
                         end
                     end
                 elseif propertyName == "Events" then
