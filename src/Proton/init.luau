@@ -20,7 +20,7 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
-local VERSION = "0"
+local VERSION = "beta 0.0.1"
 
 
 local Proton = {}       -- Module return table
