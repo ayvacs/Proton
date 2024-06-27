@@ -1,4 +1,41 @@
-site_name: My site
+site_name: Proton
 site_url: https://ave.is-a.dev/Proton
+
+repo_name: ayvacs/Proton
+repo_url: https://github.com/ayvacs/Proton
+
+copyright: Copyright &copy; 2024 ayvacs
+
+
 theme:
-  name: material
+    name: material
+    favicon: assets/logo.png
+    logo: assets/logo.png
+    icon:
+        repo: fontawesome/brands/github
+    palette:
+        scheme: slate
+        primary: black
+        accent: indigo
+    font:
+        text: Space Grotesk
+        code: Space Mono
+    language: en
+    features:
+        - content.code.copy
+        - content.code.select
+        - navigation.instant
+        - navigation.tabs
+
+
+markdown_extensions:
+    - pymdownx.highlight:
+        anchor_linenums: true
+        line_spans: __span
+        pygments_lang_class: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - admonition
+    - pymdownx.details
+    - pymdownx.blocks.html
