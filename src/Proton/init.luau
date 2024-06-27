@@ -23,7 +23,7 @@
 local VERSION = "beta 0.0.1"
 
 
-local Proton = {}       -- Module return table
+local Proton = {}
 
 
 -- Print the information in white text
@@ -42,10 +42,10 @@ Proton.error = function(content: any): nil
 end
 
 
--- Require the specified function
+-- Require the specified module
 Proton.require = function(name: string): any
     local scr = script.functions:FindFirstChild(name)
-    if (not scr) then return Proton.error("Could not require function " .. name) end
+    if (not scr) then return Proton.warn("Could not require module " .. name) end
     
     return require(scr)
 end
