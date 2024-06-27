@@ -13,14 +13,13 @@ function attemptCreateInstance(className: string): Instance
 end
 
 -- Attempt to set property of this instance
-function attemptSetInstanceProperty(inst: Instance, propertyName: string, propertyValue: any): nil
+function attemptSetInstanceProperty(inst: Instance, propertyName: string, propertyValue: any)
     local success = pcall(function() inst[propertyName] = propertyValue end)
     if (not success) then
         Proton.warn(("Unable to set instance.%s = %s"):format(
             propertyName, (tostring(propertyValue) or "(could not convert to string")
         ))
     end
-    return nil
 end
 
 -- Attempt to parent this instance to another
@@ -29,6 +28,28 @@ function attemptParentInstance(target: Instance, newParent: Instance)
     if (not success) then
         Proton.warn(("Could not parent %s to %s"):format(
             (target.Name or "?"), (newParent.Name or "?")
+        ))
+    end
+end
+
+-- Attempt to connect this event to the instance
+function attemptConnectEvent(inst: Instance, eventData: { any })
+    local eventName: string, eventFunction = unpack(eventData)
+    local event: RBXScriptSignal = inst[eventName]
+
+    if (not event) then
+        Proton.warn(("Event %s of %s does not exist"):format(
+            (eventName or "?"), (inst.Name or "?")
+        ))
+    end
+
+    local success = pcall(function()
+        event:Connect(eventFunction)
+    end)
+
+    if (not success) then
+        Proton.warn(("Could not connect %s to %s"):format(
+            (eventName or "?"), (inst.Name or "?")
         ))
     end
 end
@@ -48,11 +69,26 @@ return function(className: string)
             
             -- Check for special properties
             if pName == "Child" then
+
                 attemptParentInstance(pValue, inst)
+
             elseif pName == "Children" then
+
                 for _, target in pairs(pValue) do
                     attemptParentInstance(target, inst)
                 end
+
+            elseif pName:sub(1, 1) == "*" then
+
+                local eventName = pName:sub(2)
+                attemptConnectEvent(inst, { eventName, pValue })
+
+            elseif pName == "Events" then
+
+                for eventName, eventFunction in pairs(pValue) do
+                    attemptConnectEvent(inst, { eventName, eventFunction })
+                end
+
             else
                 -- This is not a special property
                 attemptSetInstanceProperty(inst, pName, pValue)
