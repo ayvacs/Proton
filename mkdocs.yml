@@ -7,6 +7,15 @@ repo_url: https://github.com/ayvacs/Proton
 copyright: Copyright &copy; 2024 ayvacs
 
 
+nav:
+    - Home: index.md
+    - Install Proton: installation.md
+    - Tutorials:
+        - Syntax Guide: tutorials/syntax.md
+        - Events: tutorials/events.md
+        - Special Properties: tutorials/special-properties.md
+
+
 theme:
     name: material
     favicon: assets/logo.png
