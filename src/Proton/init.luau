@@ -26,19 +26,37 @@ local VERSION = "beta 0.0.1"
 local Proton = {}
 
 
+-- For Proton print functions, process the Tuple into a string just as Lua print and warn do. This is needed however to implement the same functionality in Proton.error. This function also adds the Proton prefix to the message
+function processPrintData(...): string
+    local t = table.pack(...)
+    t.n = nil
+
+    local ret = "[Proton] "
+
+    for i, v in pairs(t) do
+        ret ..= (tostring(v) or "?")
+        if i ~= #t then
+            ret ..= " "
+        end
+    end
+
+    return ret
+end
+
+
 -- Print the information in white text
-Proton.print = function(content: any): nil
-    return print(("[Proton] %*"):format(tostring(content) or nil))
+Proton.print = function(...): nil
+    return print(processPrintData(...))
 end
 
 -- Print the information in a warning (orange text)
-Proton.warn = function(content: any): nil
-    return warn(("[Proton] %*"):format(tostring(content) or nil))
+Proton.warn = function(...): nil
+    return warn(processPrintData(...))
 end
 
 -- Print the information in an error (red text and end current thread)
-Proton.error = function(content: any): nil
-    return error(("[Proton] %*"):format(tostring(content) or nil))
+Proton.error = function(...): nil
+    return error(processPrintData(...))
 end
 
 

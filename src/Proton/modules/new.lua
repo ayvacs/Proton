@@ -6,7 +6,7 @@ Proton.print(("Loading module <%s>"):format(script.Name))
 function attemptCreateInstance(className: string): Instance
     local success, inst = pcall(Instance.new, className)
     if (not success) or (not inst) then
-        Proton.error("Unable to create instance of " .. (className) .. " type")
+        Proton.error("Unable to create instance of " .. className .. " type")
     end
 
     return inst
@@ -17,7 +17,7 @@ function attemptSetInstanceProperty(inst: Instance, propertyName: string, proper
     local success = pcall(function() inst[propertyName] = propertyValue end)
     if (not success) then
         Proton.warn(("Unable to set instance.%s = %s"):format(
-            propertyName, (tostring(propertyValue) or "(could not convert to string")
+            propertyName, (tostring(propertyValue) or "(non-string value)")
         ))
     end
 end
@@ -27,7 +27,7 @@ function attemptParentInstance(target: Instance, newParent: Instance)
     local success = pcall(function() target.Parent = newParent end)
     if (not success) then
         Proton.warn(("Could not parent %s to %s"):format(
-            (target.Name or "?"), (newParent.Name or "?")
+            target.Name, newParent.Name
         ))
     end
 end
@@ -39,7 +39,7 @@ function attemptConnectEvent(inst: Instance, eventData: { any })
 
     if (not event) then
         Proton.warn(("Event %s of %s does not exist"):format(
-            (eventName or "?"), (inst.Name or "?")
+            eventName, inst.Name
         ))
     end
 
@@ -49,7 +49,7 @@ function attemptConnectEvent(inst: Instance, eventData: { any })
 
     if (not success) then
         Proton.warn(("Could not connect %s to %s"):format(
-            (eventName or "?"), (inst.Name or "?")
+            eventName, inst.Name
         ))
     end
 end
@@ -69,9 +69,7 @@ return function(className: string)
             
             -- Check for special properties
             if pName == "Child" then
-
                 attemptParentInstance(pValue, inst)
-
             elseif pName == "Children" then
 
                 for _, target in pairs(pValue) do
