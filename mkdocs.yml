@@ -15,6 +15,7 @@ nav:
         - Events: tutorials/events.md
         - Special Properties: tutorials/special-properties.md
         - Values: tutorials/values.md
+        - Value Observers: tutorials/observers.md
 
 
 theme:

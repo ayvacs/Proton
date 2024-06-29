@@ -8,6 +8,8 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
     -- create internal container
     local this = nil
     local isLocked = false
+    local incrementorFunctions = {}
+    local numIncrementors = 0
 
     -- create accessor & mutator for this value
     local ret = {
@@ -39,7 +41,14 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
             end
 
             -- if there are no errors, set the value
+            local prevValue = self:get()
             this = newValue
+
+            -- call incrementor functions if there are any
+            for _, func in pairs(incrementorFunctions) do
+                func(newValue, prevValue)
+            end
+
             return nil
         end,
 
@@ -64,7 +73,21 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
         end,
 
         lock = function()   isLocked = true  end,
-        unlock = function() isLocked = false end
+        unlock = function() isLocked = false end,
+
+        onChange = function(self, changeFunc)
+            numIncrementors += 1
+            local id = numIncrementors
+
+            incrementorFunctions[id] = changeFunc
+
+            -- return a disconnector function that .. disconnects the function
+            return {
+                disconnect = function()
+                    incrementorFunctions[id] = nil
+                end
+            }
+        end
     }
 
     -- set initial value if needed
