@@ -59,24 +59,42 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
             return nil
         end,
 
-        increment = function(self, increment: number): nil
+        increment = function(self, increment: any)
             local val = self:get()
 
-            -- ensure the value is a number
-            if typeof(tonumber(val)) ~= "number" then
+            -- ensure the types of the new/old values match
+            local incrementType = typeof(increment)
+            local currentType = typeof(self:get())
+            if incrementType ~= currentType then
                 return Proton.warn(
-                    ("Could not increment %*! (%* is not of type number)"):format(
+                    ("Could not increment %*! (%* is not of type %*)"):format(
                         (name ~= nil
                             and ("the value of " .. tostring(name))
                             or "this value"),
-                        ('"'..tostring(increment)..'"' or "the increment")
+                        ('"'..tostring(increment)..'"' or "the increment"),
+                        ('"'..currentType..'"')
                     )
                 )
             end
 
             -- increment the value
-            self:set(val + increment)
-            return nil
+            if currentType == "string" then
+                self:set(val .. increment)
+                return
+            end
+
+            local succ = pcall(self.set, self, val + increment)
+            if not succ then
+                return Proton.warn(
+                    ("Could not increment %*!"):format(
+                        (name ~= nil
+                            and ("the value of " .. tostring(name))
+                            or "this value")
+                    )
+                )
+            end
+
+            return
         end,
 
         lock = function(self)   isLocked = true  end,

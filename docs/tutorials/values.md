@@ -16,22 +16,22 @@ print(myValue:get())    -- bar
 
 ## Increment
 
-Number values can be incremented by calling `:increment()`.
+Values can be incremented by calling `:increment()`. This has the expected result for all [Roblox engine data types](https://create.roblox.com/docs/reference/engine/datatypes).
 
 ``` lua linenums="1"
 local health = value.new(100)
-
 health:increment(-10)
-print(health:get())     -- 90
-```
+print(health:get()) -- 90
 
-This will not work for non-number values, instead printing a warning without ending the thread.
 
-``` lua linenums="1"
+local size = value.new(UDim2.new(1, 0, 1, 0))
+size:increment(UDim2.new(0, 0, 0, 200))
+print(size:get())   -- {1, 0}, {1, 200}
+
+
 local name = value.new("John")
-
-name:increment(" Smith")    -- [Proton] Could not increment this value! (" Smith" is not of type number)
-print(name:get())           -- John
+name:increment(" Smith")
+print(name:get())   -- John Smith
 ```
 
 ## Type restriction
