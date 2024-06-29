@@ -32,7 +32,7 @@ function attemptParentInstance(target: Instance, newParent: Instance)
 end
 
 -- Attempt to connect this event to the instance
-function attemptConnectEvent(inst: Instance, eventData: { any })
+function attemptConnectEvent(inst: Instance, eventData)
     local eventName: string, eventFunction = unpack(eventData)
     local event: RBXScriptSignal = inst[eventName]
 

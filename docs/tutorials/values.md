@@ -78,7 +78,7 @@ Attempting to update a locked value will print a warning without ending the thre
 
 ## Naming
 
-You can opt to give a value a name by including the name as the third parameter to `value.new()`. This will specify potential error messages by including the name of the value, potentially helping you track down the root cause of specific error. This has no effect outside of error logging.
+You can opt to give a value a name by including the name as the third parameter to `value.new()`. This will help you identify values in error messages, aiding you track down the root cause of potential errors. This has no effect outside of error logging.
 
 ``` lua linenums="1"
 local health = value.new(100, "number", "Health")

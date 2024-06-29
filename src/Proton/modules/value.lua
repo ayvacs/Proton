@@ -8,11 +8,13 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
     -- create internal container
     local this = nil
     local isLocked = false
-    local incrementorFunctions = {}
-    local numIncrementors = 0
+    local observers = {}
+    local numObservers = 0
 
     -- create accessor & mutator for this value
     local ret = {
+        __is_proton_value = true, -- internal value identification
+
         get = function(self): any
             return this or nil
         end,
@@ -50,7 +52,7 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
             this = newValue
 
             -- call incrementor functions if there are any
-            for _, func in pairs(incrementorFunctions) do
+            for _, func in pairs(observers) do
                 func(newValue, prevValue)
             end
 
@@ -77,19 +79,19 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
             return nil
         end,
 
-        lock = function()   isLocked = true  end,
-        unlock = function() isLocked = false end,
+        lock = function(self)   isLocked = true  end,
+        unlock = function(self) isLocked = false end,
 
-        onChange = function(self, changeFunc)
-            numIncrementors += 1
-            local id = numIncrementors
+        onChange = function(changeFunc): { [string]: (nil) -> nil }
+            numObservers += 1
+            local id = numObservers
 
-            incrementorFunctions[id] = changeFunc
+            observers[id] = changeFunc
 
             -- return a disconnector function that .. disconnects the function
             return {
                 disconnect = function()
-                    incrementorFunctions[id] = nil
+                    observers[id] = nil
                 end
             }
         end
