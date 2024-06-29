@@ -12,11 +12,9 @@ observer.new = function(value, changeFunc)
 
     -- hook the function and return a disconnector
     local disconnector = value.onChange(changeFunc)
-    return {
-        disconnect = function(self)
-            disconnector.disconnect()
-        end
-    }
+    return { disconnect = function(self)
+        disconnector.disconnect()
+    end }
 end
 
 

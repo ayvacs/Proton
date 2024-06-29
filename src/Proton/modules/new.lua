@@ -37,20 +37,19 @@ function attemptConnectEvent(inst: Instance, eventData)
     local event: RBXScriptSignal = inst[eventName]
 
     if (not event) then
-        Proton.warn(("Event %s of %s does not exist"):format(
+        return Proton.warn(("Event %s of %s does not exist"):format(
             eventName, inst.Name
         ))
     end
 
-    local success = pcall(function()
-        event:Connect(eventFunction)
-    end)
-
+    local success = pcall(event.Connect, event, eventFunction)
     if (not success) then
         Proton.warn(("Could not connect %s to %s"):format(
             eventName, inst.Name
         ))
     end
+
+    return
 end
 
 

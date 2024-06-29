@@ -42,17 +42,18 @@ Proton.error = function(...): nil
 end
 
 
--- Require the specified module
+-- Import the specified module
 Proton.require = function(name: string): any
-    local scr = script.modules:FindFirstChild(name)
-    if (not scr) then return Proton.warn("Could not require module " .. name) end
-    
-    Proton.print(("Loading module <%s>"):format(name))
-    
-    return require(scr)
+    local scr = script:WaitForChild("modules"):FindFirstChild(name)
+    if (not scr) then Proton.error("Could not find module " .. name) end
+
+    local req = require(scr)
+    if (not req) then Proton.error("Could not require module " .. name) end
+
+    Proton.print(("Imported module <%s.luau>"):format(name))
+    return req
 end
 
 
 Proton.print("Loaded Proton " .. VERSION)
-Proton.print("https://ave.is-a.dev/Proton")
 return Proton
