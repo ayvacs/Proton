@@ -12,7 +12,7 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
     -- create accessor & mutator for this value
     local ret = {
         get = function(self): any
-            return this
+            return this or nil
         end,
 
         set = function(self, newValue: any): nil
@@ -32,7 +32,7 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
                         (name ~= nil
                             and ("the value of " .. tostring(name))
                             or "this value"),
-                        (tostring(newValue) or "this value"),
+                        ('"'..tostring(newValue)..'"' or "the new value"),
                         (tostring(fixedType) or "unknown type")
                     )
                 )
@@ -40,6 +40,26 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
 
             -- if there are no errors, set the value
             this = newValue
+            return nil
+        end,
+
+        increment = function(self, increment: number): nil
+            local val = self:get()
+
+            -- ensure the value is a number
+            if typeof(tonumber(val)) ~= "number" then
+                return Proton.warn(
+                    ("Could not increment %*! (%* is not of type number)"):format(
+                        (name ~= nil
+                            and ("the value of " .. tostring(name))
+                            or "this value"),
+                        ('"'..tostring(increment)..'"' or "the increment")
+                    )
+                )
+            end
+
+            -- increment the value
+            self:set(val + increment)
             return nil
         end,
 

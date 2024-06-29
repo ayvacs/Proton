@@ -8,9 +8,30 @@ Values are created using the `value.new()` function. Values are read with the `:
 local value = Proton.require("value")
 
 local myValue = value.new("foo")
+print(myValue:get())    -- foo
 
-print(myValue:get())                -- foo
-print( typeof( myValue:get() ))     -- string
+myValue:set("bar")
+print(myValue:get())    -- bar
+```
+
+## Increment
+
+Number values can be incremented by calling `:increment()`.
+
+``` lua linenums="1"
+local health = value.new(100)
+
+health:increment(-10)
+print(health:get())     -- 90
+```
+
+This will not work for non-number values, instead printing a warning without ending the thread.
+
+``` lua linenums="1"
+local name = value.new("John")
+
+name:increment(" Smith")    -- [Proton] Could not increment this value! (" Smith" is not of type number)
+print(name:get())           -- John
 ```
 
 ## Type restriction
@@ -23,13 +44,15 @@ local aStringValue = value.new("foo", "string")
 aStringValue:set("bar")
 print(aStringValue:get())   -- bar
 
-aStringValue:set(1337)      -- [Proton] Could not set this value! (1337 is not of type string)
+aStringValue:set(1337)      -- [Proton] Could not set this value! ("1337" is not of type string)
 print(aStringValue:get())   -- bar
 ```
 
+As you can see in the above example, attempting to set a restricted type to a value of a different type will print a warning without ending the thread.
+
 !!! info "Valid type names"
 
-    The type name should be the result of the `typeof()` function called on the variable. For instance, if `typeof()` returns `string`, then the type name should be "string".
+    The type name should be the result of the `typeof()` function. For instance, since `typeof(15)` returns `number`, the type name is also "number".
 
 ## Locking
 
@@ -38,18 +61,20 @@ You can lock a value (disable the value from being updated by any script) by cal
 ``` lua linenums="1"
 local myValue = value.new("foo")
 
-print(myValue:get())	-- foo
+print(myValue:get())    -- foo
 
 myValue:lock()
 
 myValue:set("bar")      -- [Proton] This value is locked!
-print(myValue:get())	-- foo
+print(myValue:get())    -- foo
 
 myValue:unlock()
 
 myValue:set("bar")
-print(myValue:get())	-- bar
+print(myValue:get())    -- bar
 ```
+
+Attempting to update a locked value will print a warning without ending the thread.
 
 ## Naming
 
@@ -62,5 +87,5 @@ health:lock()
 health:set(90)      -- [Proton] Health is locked!
 
 health:unlock()
-health:set("bar")	-- [Proton] Could not set the value of Health! (bar is not of type number)
+health:set("bar")   -- [Proton] Could not set the value of Health! ("bar" is not of type number)
 ```
