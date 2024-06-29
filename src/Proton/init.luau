@@ -26,49 +26,33 @@ local VERSION = "beta 0.0.1"
 local Proton = {}
 
 
--- For Proton print functions, process the Tuple into a string just as Lua print and warn do. This is needed however to implement the same functionality in Proton.error. This function also adds the Proton prefix to the message
-function processPrintData(...): string
-    local t = table.pack(...)
-    t.n = nil
-
-    local ret = "[Proton] "
-
-    for i, v in pairs(t) do
-        ret ..= (tostring(v) or "?")
-        if i ~= #t then
-            ret ..= " "
-        end
-    end
-
-    return ret
-end
-
-
 -- Print the information in white text
 Proton.print = function(...): nil
-    return print(processPrintData(...))
+    return print("[Proton] " .. table.concat( table.pack(...), " " ))
 end
 
 -- Print the information in a warning (orange text)
 Proton.warn = function(...): nil
-    return warn(processPrintData(...))
+    return warn("[Proton] " .. table.concat( table.pack(...), " " ))
 end
 
 -- Print the information in an error (red text and end current thread)
 Proton.error = function(...): nil
-    return error(processPrintData(...))
+    return error("[Proton] " .. table.concat( table.pack(...), " " ))
 end
 
 
 -- Require the specified module
 Proton.require = function(name: string): any
-    local scr = script.functions:FindFirstChild(name)
+    local scr = script.modules:FindFirstChild(name)
     if (not scr) then return Proton.warn("Could not require module " .. name) end
+    
+    Proton.print(("Loading module <%s>"):format(name))
     
     return require(scr)
 end
 
 
-Proton.print("Loaded Proton v" .. VERSION)
+Proton.print("Loaded Proton " .. VERSION)
 Proton.print("https://ave.is-a.dev/Proton")
 return Proton

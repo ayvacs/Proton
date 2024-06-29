@@ -1,5 +1,4 @@
 local Proton = require(script.Parent.Parent)
-Proton.print(("Loading module <%s>"):format(script.Name))
 
 
 -- Attempt to create an instance of this class
