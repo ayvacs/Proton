@@ -18,6 +18,11 @@ value.new = function(initialValue: any, fixedType: any | nil, name: string | nil
         end,
 
         set = function(self, newValue: any): nil
+            if (newValue == self:get()) then
+                -- the value is the same; don't waste effort changing anything.
+                return
+            end
+
             -- check for lock
             if (isLocked) then
                 return Proton.warn(

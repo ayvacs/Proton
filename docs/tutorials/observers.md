@@ -13,17 +13,27 @@ observer.new(health, function(newHealth, previousHealth)
 	
 	if newHealth < previousHealth then
 		print("Ow! I took " .. (previousHealth - newHealth) .. " damage!")
-	elseif newHealth > previousHealth then
-		print("I was healed by " .. (newHealth - previousHealth) .. " points!")
 	else
-		print("My health value was updated, but I didn't heal or take damage.")
-	end
+		print("I was healed by " .. (newHealth - previousHealth) .. " points!")
+    end
 	
 end)
 
 health:increment(-10)   -- Ow! I took 10 damage!
 health:increment(5)     -- I was healed by 5 points!
-health:increment(0)     -- My health value was updated, but I didn't heal or take damage.
+health:increment(0)
+```
+
+Observers will only work when the value is changed to a new, unique value. This means that, in both of the following code snippets, the observer will never function.
+
+``` lua
+local name = value.new("John")
+name:set("John")
+```
+
+``` lua
+local age = value.new(20, "number")
+age:increment(0)
 ```
 
 ## Disconnecting Observers
@@ -33,9 +43,7 @@ Observers can be disconnected by calling `:disconnect()`.
 ``` lua linenums="1"
 local name = value.new("John")
 local obs = observer.new(name, function(newName, previousName)
-	if newName ~= previousName then
-		print("My name changed to " .. newName .. "!")
-	end
+    print("My name changed to " .. newName .. "!")
 end)
 
 name:set("Jonas")   -- My name changed to Jonas!
