@@ -14,6 +14,7 @@ nav:
         - Syntax Guide: tutorials/syntax.md
         - Events: tutorials/events.md
         - Special Properties: tutorials/special-properties.md
+        - Values: tutorials/values.md
 
 
 theme:
@@ -47,4 +48,3 @@ markdown_extensions:
     - pymdownx.superfences
     - admonition
     - pymdownx.details
-    - pymdownx.blocks.html
