@@ -23,7 +23,7 @@ function value.new(initialValue: any, fixedType: any | nil, name: string | nil)
 
 
     function self:get(): any
-        return myValue or nil
+        return myValue
     end
 
 
