@@ -57,8 +57,20 @@ function value.new(initialValue: any, fixedType: any | nil, name: string | nil)
         myValue = newValue
 
         -- call incrementor functions if there are any
-        for _, func in pairs(observers) do
-            func(myValue, currentVal)
+        for _, observer in pairs(observers) do
+            -- get the observer and validation functions
+            local changeFunc, validateFunc = table.unpack(observer)
+
+            -- check if we should call the observer function
+            local doIncrement = true
+            if validateFunc and typeof(validateFunc) == "function" then
+                doIncrement = validateFunc(myValue, currentVal)
+            end
+
+            -- call the observer function if we should
+            if doIncrement then
+                changeFunc(myValue, currentVal)
+            end
         end
 
         return myValue
@@ -107,11 +119,16 @@ function value.new(initialValue: any, fixedType: any | nil, name: string | nil)
         return self:get()
     end
 
-    function self:onChange(changeFunc): { [string]: (nil) -> nil }
+
+    function self:onChange(
+        changeFunc: (any) -> any,
+        validateFunc: (any) -> any
+    ): { [string]: (nil) -> nil }
+
         numObservers += 1
         local id = numObservers
 
-        observers[id] = changeFunc
+        observers[id] = { changeFunc, validateFunc }
 
         -- return a disconnector function that .. disconnects the function
         return { disconnect = function()
