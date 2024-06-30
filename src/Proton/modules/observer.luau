@@ -11,7 +11,7 @@ observer.new = function(value, changeFunc)
     end
 
     -- hook the function and return a disconnector
-    local disconnector = value.onChange(changeFunc)
+    local disconnector = value:onChange(changeFunc)
     return { disconnect = function(self)
         disconnector.disconnect()
     end }
